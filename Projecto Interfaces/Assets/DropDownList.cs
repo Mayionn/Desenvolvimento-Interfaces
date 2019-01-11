@@ -5,32 +5,47 @@ using UnityEngine.UI;
 
 public class DropDownList : MonoBehaviour {
 
-    public Dropdown continents;
-    public Dropdown regions;
+
+    Dropdown m_Dropdown;
+    public Canvas option1;
+    public Canvas option2;
 
 
-    public Dropdown m_Dropdown;
+
     int m_DropdownValue;
 
     void Start()
     {
+        //Fetch the DropDown component from the GameObject
         m_Dropdown = GetComponent<Dropdown>();
+
+        //Output the first Dropdown index value
         Debug.Log("Starting Dropdown Value : " + m_Dropdown.value);
     }
 
-    void Update () {
+    void Update()
+    {
 
         m_DropdownValue = m_Dropdown.value;
+
+        if (m_DropdownValue == 0)
+        {
+            option1.enabled = false;
+            option2.enabled = false;
+        }
+
         if (m_DropdownValue == 1)
         {
-            continents.enabled = true;
-
+            option1.enabled = true;
+            if (option2.enabled == true)
+                option2.enabled = false;
         }
+
         if (m_DropdownValue == 2)
         {
-            regions.enabled = true;
-
+            option2.enabled = true;
+            if (option1.enabled == true)
+                option1.enabled = false;
         }
-
     }
 }
